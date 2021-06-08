@@ -1,15 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
-import Search from './Search';
+import React from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import PropTypes from "prop-types";
+import Search from "./Search";
 
-function Header() {
+function Header({ getUserGist }) {
   return (
     <Wrapper>
-      <Octicon name="mark-github" mega/>
-      <Search />
+      <Octicon name="mark-github" mega />
+      <Search getUserGist={getUserGist} />
     </Wrapper>
-  )
+  );
 }
 
 const Wrapper = styled.div`
@@ -23,4 +24,9 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-export default Header
+// To check the props type
+Header.propTypes = {
+  getUserGist: PropTypes.func,
+};
+
+export default Header;

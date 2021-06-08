@@ -1,17 +1,28 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import Octicon from "react-octicon";
 
-const Search = () => {
+const Search = ({ getUserGist }) => {
+  const inputHandler = (event) => {
+    // Handle search with Enter button
+    if (event.key === "Enter") {
+      getUserGist(event.target.value);
+    }
+  };
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          onKeyDown={inputHandler}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +44,13 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+// To check the props type
+Search.propTypes = {
+  getUserGist: PropTypes.func,
+};
+export default Search;
